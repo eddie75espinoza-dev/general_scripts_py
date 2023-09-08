@@ -1,0 +1,21 @@
+import os
+
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+
+load_dotenv()
+
+USER = os.getenv("POSTGRES_USER")
+PASS = os.getenv("POSTGRES_PASS")
+HOST = os.getenv("POSTGRES_HOST")
+PORT = os.getenv("POSTGRES_PORT")
+DATABASE = os.getenv("POSTGRES_DB")
+    
+engine = create_engine(f"postgresql://{USER}:{PASS}@{HOST}:{PORT}/{DATABASE}")
+
+Session = sessionmaker(bind=engine)
+
+Base = declarative_base()
